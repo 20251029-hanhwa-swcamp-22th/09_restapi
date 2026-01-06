@@ -25,6 +25,14 @@ repositories {
 }
 
 dependencies {
+/* 스웨거 */
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.15'
+
+    /* 헤이티오스 */
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    /* 벨리데이션 */
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
