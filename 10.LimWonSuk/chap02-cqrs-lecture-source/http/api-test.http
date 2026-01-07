@@ -1,0 +1,66 @@
+### 상품 상세 조회
+GET http://localhost:8080/products/34
+Accept: application/json # 응답 데이터의 형식을 지정
+
+### 상품 상세 조회 - 1page 10개, 조건X
+GET http://localhost:8080/products
+
+### 상품 상세 조회 - 2page 10개, 조건X
+GET http://localhost:8080/products?page=2
+
+### 상품 상세 조회 - 3page 10개, 조건X
+GET http://localhost:8080/products?page=3
+
+### 상품 상세 조회 - 10page 10개, 조건X
+GET http://localhost:8080/products?page=10
+
+### 상품 상세 조회 - 1page 5개, 조건 categoryCode=1
+GET http://localhost:8080/products?page=1&size=5&categoryCode=1
+
+### 상품 상세 조회 - 1page 5개, 조건 categoryCode=1, productName=밥
+GET http://localhost:8080/products?page=1&size=5&categoryCode=1&productName=밥
+
+### 상품 상세 조회 - 1page 12개, 조건 categoryCode=2, productName=리
+GET http://localhost:8080/products?page=1&size=12&categoryCode=2&productName=리
+
+### 상품 상세 조회 - 1page 2개, 조건 categoryCode=2, productName=리
+POST {{baseUrl}}/products?page=1&size=2&categoryCode=2&productName=리
+
+### 상품 등록
+POST http://localhost:8080/products
+Content-Type: application/json # 요청시 전달하는 데이터가 JSON임을 명시
+
+{
+  "productName" : "30분짜장",
+  "productPrice": 2000,
+  "productDescription": "2천원한 끼",
+  "category": 1,
+  "productStock": 13
+
+}
+
+
+### 상품 등록
+# @RequestPart를 사용하여 JSON과 파일을 함께 전송
+# 주의: 테스트를 실행하려면 http 폴더 내에 'sample.png' 파일이 존재해야 함
+# boundary=boundary: 각 데이터 조각(Part)을 구분하기 위한 구분자 문자열을 정의
+POST http://localhost:8080/products
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="productCreateRequest"
+Content-Type: application/json
+
+{
+  "productName": "신규 등록 상품",
+  "productPrice": 25000,
+  "productDescription": "API 테스트를 통해 등록되는 상품입니다.",
+  "categoryCode": 1,
+  "productStock": 100
+}
+--boundary
+Content-Disposition: form-data; name="productImg"; filename="test2.png"
+Content-Type: image/png
+
+< ./test2.png
+--boundary--
