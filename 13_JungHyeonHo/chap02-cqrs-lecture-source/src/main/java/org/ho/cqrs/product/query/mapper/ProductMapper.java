@@ -1,0 +1,21 @@
+package org.ho.cqrs.product.query.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.ho.cqrs.product.query.dto.request.ProductSearchRequest;
+import org.ho.cqrs.product.query.dto.response.ProductDTO;
+
+import java.util.List;
+
+@Mapper // 매퍼 등록 -> 구현된 프록시 객체가 Bean으로 등록됨
+public interface ProductMapper {
+
+  /* 상품 코드로 상품 상세 조회 */
+  ProductDTO selectProductByCode(Long productCode);
+
+  /* 조건에 맞는 상품의 개수 조회 */
+  Long countProducts(ProductSearchRequest productSearchRequest);
+
+  /* 조건(검색/페이징)에 맞는 상품 목록 조회 */
+  List<ProductDTO> selectProducts(ProductSearchRequest productSearchRequest);
+
+}
